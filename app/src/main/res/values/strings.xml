@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Paging Android</string>
+    <string name="weather_api_key">92f56841259a3ed86d83d265d03a243d</string>
+    <string name="mapbox_access_token">pk.eyJ1Ijoia2Fmcmk4ODg5IiwiYSI6ImNsMnE3MTZqZDAzdGozY3MwN3gxOTlmdXEifQ.VGItxS8wCWnpAbkM0xPIWA</string>
+    <string name="mapbox_test_secret_token">sk.eyJ1Ijoia2Fmcmk4ODg5IiwiYSI6ImNsMnE3ZGc0NTFueGIzYm11aHk1eDk5cnoifQ.MXwGzrprrY5Jx2beGkIY2w</string>
+</resources>

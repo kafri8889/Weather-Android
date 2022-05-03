@@ -1,0 +1,42 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+        maven {
+            url 'https://api.mapbox.com/downloads/v2/releases/maven'
+            authentication {
+                basic(BasicAuthentication)
+            }
+            credentials {
+                // Do not change the username below.
+                // This should always be `mapbox` (not your username).
+                username = "mapbox"
+                // Use the secret token you stored in gradle.properties as the password
+                password = "sk.eyJ1Ijoia2Fmcmk4ODg5IiwiYSI6ImNsMnE3ZGc0NTFueGIzYm11aHk1eDk5cnoifQ.MXwGzrprrY5Jx2beGkIY2w"
+            }
+        }
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            url 'https://api.mapbox.com/downloads/v2/releases/maven'
+            authentication {
+                basic(BasicAuthentication)
+            }
+            credentials {
+                // Do not change the username below.
+                // This should always be `mapbox` (not your username).
+                username = "mapbox"
+                // Use the secret token you stored in gradle.properties as the password
+                password = "sk.eyJ1Ijoia2Fmcmk4ODg5IiwiYSI6ImNsMnE3ZGc0NTFueGIzYm11aHk1eDk5cnoifQ.MXwGzrprrY5Jx2beGkIY2w"
+            }
+        }
+    }
+}
+rootProject.name = "Paging Android"
+include ':app'
