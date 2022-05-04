@@ -1,5 +1,7 @@
 package com.anafthdev.weather.model.weather
 
+import com.google.gson.Gson
+
 data class Weather(
     val base: String,
     val clouds: Clouds,
@@ -15,6 +17,11 @@ data class Weather(
     val weather: List<WeatherX>,
     val wind: Wind
 ) {
+    
+    fun toJSON(): String {
+        return Gson().toJson(this)
+    }
+    
     companion object {
         val default = Weather(
             base = "",
@@ -31,5 +38,9 @@ data class Weather(
             wind = Wind.default,
             weather = listOf(WeatherX.default)
         )
+    
+        fun fromJSON(src: String): Weather {
+            return Gson().fromJson(src, Weather::class.java)
+        }
     }
 }
