@@ -2,6 +2,7 @@ package com.anafthdev.weather.data.repository
 
 import com.anafthdev.weather.data.networking.WeatherService
 import com.anafthdev.weather.foundation.di.DiName
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -12,13 +13,11 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object RepositoryModule {
+abstract class RepositoryModule {
 	
-	@Singleton
-	@Provides
-	fun provideRepository(
-		weatherService: WeatherService,
-		@Named(DiName.DISPATCHER_IO) dispatcher: CoroutineDispatcher
-	): IRepository = Repository(dispatcher, weatherService)
+	@Binds
+	abstract fun provideRepository(
+		repository: Repository
+	): IRepository
 	
 }
