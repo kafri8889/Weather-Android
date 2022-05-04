@@ -16,28 +16,4 @@ abstract class DatasourceModule {
 		datasource: Datasource
 	): IDatasource
 	
-//	companion object {
-//
-//		@Singleton
-//		@Provides
-//		fun provideLocalDatasource(
-//			@Named(DiName.DISPATCHER_IO) dispatcher: CoroutineDispatcher,
-//			appDatastore: AppDatastore
-//		): LocalDatasource = LocalDatasource(
-//			dispatcher,
-//			appDatastore
-//		)
-//
-//		@Singleton
-//		@Provides
-//		fun provideRemoteDatasource(
-//			@Named(DiName.DISPATCHER_IO) dispatcher: CoroutineDispatcher,
-//			weatherService: WeatherService
-//		): RemoteDatasource = RemoteDatasource(
-//			dispatcher,
-//			weatherService
-//		)
-//
-//	}
-	
 }

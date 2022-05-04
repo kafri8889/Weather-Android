@@ -13,7 +13,7 @@ abstract class RemoteDatasourceModule {
 	
 	@Binds
 	abstract fun provideRemoteDatasource(
-		localDatasource: RemoteDatasource
+		remoteDatasource: RemoteDatasource
 	): IRemoteDatasource
 	
 }
