@@ -8,10 +8,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.anafthdev.weather.R
+import com.anafthdev.weather.data.datastore.AppDatastore
 import com.anafthdev.weather.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,11 +22,11 @@ private const val ARG_PARAM2 = "param2"
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
+
+	private lateinit var binding: FragmentHomeBinding
 	
 	private var param1: String? = null
 	private var param2: String? = null
-	
-	private lateinit var binding: FragmentHomeBinding
 	
 	private val homeViewModel: HomeViewModel by viewModels()
 	

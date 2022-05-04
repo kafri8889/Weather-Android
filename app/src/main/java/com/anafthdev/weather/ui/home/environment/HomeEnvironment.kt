@@ -3,6 +3,7 @@ package com.anafthdev.weather.ui.home.environment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asFlow
+import com.anafthdev.weather.data.datastore.AppDatastore
 import com.anafthdev.weather.data.repository.IRepository
 import com.anafthdev.weather.foundation.di.DiName
 import com.anafthdev.weather.model.weather.Weather
@@ -15,6 +16,7 @@ import javax.inject.Named
 
 class HomeEnvironment @Inject constructor(
 	@Named(DiName.DISPATCHER_IO) override val dispatcher: CoroutineDispatcher,
+	private val appDatastore: AppDatastore,
 	private val repository: IRepository
 ): IHomeEnvironment {
 	
@@ -24,6 +26,7 @@ class HomeEnvironment @Inject constructor(
 	override suspend fun getWeather(lat: Double, lon: Double, apiKey: String) {
 		repository.getWeather(lat, lon, apiKey).collect {
 			_weather.postValue(it)
+			appDatastore.setWeather(it.toJSON())
 		}
 	}
 	
