@@ -2,27 +2,23 @@ package com.anafthdev.weather.ui.home
 
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import com.anafthdev.weather.R
 import com.anafthdev.weather.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
 	private lateinit var binding: FragmentHomeBinding
-	
-	private var param1: String? = null
-	private var param2: String? = null
+	private lateinit var navController: NavController
 	
 	private val homeViewModel: HomeViewModel by viewModels()
 	
@@ -31,23 +27,26 @@ class HomeFragment : Fragment() {
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setHasOptionsMenu(true)
-		arguments?.let {
-			param1 = it.getString(ARG_PARAM1)
-			param2 = it.getString(ARG_PARAM2)
-		}
 	}
 	
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-		binding = FragmentHomeBinding.bind(inflater.inflate(R.layout.fragment_home, container, false))
+		binding = FragmentHomeBinding.inflate(inflater)
 		return binding.root
 	}
 	
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 		
+		navController = findNavController()
+		
+		(requireActivity() as AppCompatActivity).supportActionBar?.let {
+			it.setDisplayHomeAsUpEnabled(false)
+			it.setDisplayShowHomeEnabled(false)
+		}
+		
 		lifecycleScope.launch {
-			homeViewModel.state.collect {
-				state = it
+			homeViewModel.state.collect { newState ->
+				state = newState
 				updateUI()
 			}
 		}
@@ -71,7 +70,7 @@ class HomeFragment : Fragment() {
 	
 	override fun onOptionsItemSelected(item: MenuItem): Boolean {
 		when (item.itemId) {
-			R.id.selectCity_HomeFragmentMenu -> {}
+			R.id.selectCity_HomeFragmentMenu -> navController.navigate(R.id.selectCityFragment)
 		}
 		
 		return true
@@ -79,17 +78,5 @@ class HomeFragment : Fragment() {
 	
 	private fun updateUI() {
 		binding.tex.text = state.weather.name
-	}
-	
-	companion object {
-		
-		@JvmStatic
-		fun newInstance(param1: String, param2: String) =
-			HomeFragment().apply {
-				arguments = Bundle().apply {
-					putString(ARG_PARAM1, param1)
-					putString(ARG_PARAM2, param2)
-				}
-			}
 	}
 }
