@@ -1,4 +1,4 @@
-package com.anafthdev.weather.data.networking
+package com.anafthdev.weather.data.networking.weather
 
 import dagger.Module
 import dagger.Provides

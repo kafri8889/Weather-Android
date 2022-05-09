@@ -1,4 +1,4 @@
-package com.anafthdev.weather.data.networking
+package com.anafthdev.weather.data.networking.weather
 
 import com.anafthdev.weather.model.weather.Weather
 import retrofit2.Call

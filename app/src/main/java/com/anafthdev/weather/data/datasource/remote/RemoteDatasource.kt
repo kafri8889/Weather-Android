@@ -1,7 +1,6 @@
 package com.anafthdev.weather.data.datasource.remote
 
-import com.anafthdev.weather.data.datasource.IDatasource
-import com.anafthdev.weather.data.networking.WeatherService
+import com.anafthdev.weather.data.networking.weather.WeatherService
 import com.anafthdev.weather.foundation.di.DiName
 import com.anafthdev.weather.model.weather.Weather
 import kotlinx.coroutines.CoroutineDispatcher
