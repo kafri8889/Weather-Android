@@ -30,7 +30,7 @@ class HomeEnvironment @Inject constructor(
 		}
 	}
 	
-	override suspend fun getWeather(): Flow<Weather> {
+	override fun getWeather(): Flow<Weather> {
 		return weather.asFlow()
 	}
 }

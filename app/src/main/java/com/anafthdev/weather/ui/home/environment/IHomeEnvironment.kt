@@ -10,6 +10,6 @@ interface IHomeEnvironment {
 	
 	suspend fun getWeather(lat: Double, lon: Double, apiKey: String)
 	
-	suspend fun getWeather(): Flow<Weather>
+	fun getWeather(): Flow<Weather>
 	
 }
