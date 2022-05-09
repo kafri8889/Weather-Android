@@ -1,19 +1,15 @@
 package com.anafthdev.weather.ui.home
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.anafthdev.weather.R
-import com.anafthdev.weather.data.datastore.AppDatastore
 import com.anafthdev.weather.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,6 +30,7 @@ class HomeFragment : Fragment() {
 	
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
+		setHasOptionsMenu(true)
 		arguments?.let {
 			param1 = it.getString(ARG_PARAM1)
 			param2 = it.getString(ARG_PARAM2)
@@ -64,6 +61,20 @@ class HomeFragment : Fragment() {
 				)
 			)
 		}
+	}
+	
+	override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+		super.onCreateOptionsMenu(menu, inflater)
+		
+		inflater.inflate(R.menu.home_fragment, menu)
+	}
+	
+	override fun onOptionsItemSelected(item: MenuItem): Boolean {
+		when (item.itemId) {
+			R.id.selectCity_HomeFragmentMenu -> {}
+		}
+		
+		return true
 	}
 	
 	private fun updateUI() {
