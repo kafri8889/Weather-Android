@@ -8,6 +8,6 @@ interface IRepository {
 	
 	val dispatcher: CoroutineDispatcher
 	
-	suspend fun getWeather(lat: Double, lon: Double, apiKey: String): Flow<Weather>
+	suspend fun getWeather(lat: Double, lon: Double, timezone: String): Flow<Weather>
 	
 }

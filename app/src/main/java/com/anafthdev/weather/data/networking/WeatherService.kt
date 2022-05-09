@@ -9,11 +9,13 @@ import retrofit2.http.Query
 
 interface WeatherService {
 	
-	@GET("/data/2.5/weather")
+	@GET("/v1/forecast")
 	fun getWeather(
-		@Query("lat") lat: Double,
-		@Query("lon") lon: Double,
-		@Query("appid") apiKey: String
+		@Query("latitude") lat: Double,
+		@Query("longitude") lon: Double,
+		@Query("timezone") timeZone: String,
+		@Query("hourly", encoded = true) hourly: String = "temperature_2m,relativehumidity_2m,apparent_temperature,pressure_msl,precipitation,weathercode,cloudcover,vapor_pressure_deficit,windspeed_10m",
+		@Query("timeformat") timeFormat: String = "unixtime"
 	): Call<Weather>
 
 }

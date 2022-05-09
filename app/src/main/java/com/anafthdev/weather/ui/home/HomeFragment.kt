@@ -13,6 +13,7 @@ import com.anafthdev.weather.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import java.util.*
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -56,7 +57,7 @@ class HomeFragment : Fragment() {
 				HomeAction.GetWeather(
 					lat = -6.474009961699578,
 					lon = 106.79156490092377,
-					apiKey = getString(R.string.weather_api_key)
+					timezone = TimeZone.getDefault().id
 				)
 			)
 		}
@@ -77,6 +78,6 @@ class HomeFragment : Fragment() {
 	}
 	
 	private fun updateUI() {
-		binding.tex.text = state.weather.name
+		binding.tex.text = state.weather.toString()
 	}
 }

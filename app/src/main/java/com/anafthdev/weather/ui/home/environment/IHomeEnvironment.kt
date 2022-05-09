@@ -8,7 +8,7 @@ interface IHomeEnvironment {
 	
 	val dispatcher: CoroutineDispatcher
 	
-	suspend fun getWeather(lat: Double, lon: Double, apiKey: String)
+	suspend fun getWeather(lat: Double, lon: Double, timezone: String)
 	
 	fun getWeather(): Flow<Weather>
 	

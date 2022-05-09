@@ -32,7 +32,7 @@ class HomeViewModel @Inject constructor(
 					environment.getWeather(
 						lat = action.lat,
 						lon = action.lon,
-						apiKey = action.apiKey
+						timezone = action.timezone
 					)
 				}
 			}

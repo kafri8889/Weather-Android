@@ -17,11 +17,11 @@ class Datasource @Inject constructor(
 	private val localDatasource: LocalDatasource
 ): IDatasource {
 	
-	override fun getWeather(lat: Double, lon: Double, apiKey: String): Flow<Weather> {
+	override fun getWeather(lat: Double, lon: Double, timezone: String): Flow<Weather> {
 		return remoteDatasource.getWeather(
 			lat = lat,
 			lon = lon,
-			apiKey = apiKey,
+			timezone = timezone,
 			onFailure = {
 				localDatasource.getWeather().first()
 			}

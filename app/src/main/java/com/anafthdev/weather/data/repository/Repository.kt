@@ -13,8 +13,8 @@ class Repository @Inject constructor(
 	private val datasource: IDatasource
 ): IRepository {
 	
-	override suspend fun getWeather(lat: Double, lon: Double, apiKey: String): Flow<Weather> {
-		return datasource.getWeather(lat, lon, apiKey)
+	override suspend fun getWeather(lat: Double, lon: Double, timezone: String): Flow<Weather> {
+		return datasource.getWeather(lat, lon, timezone)
 	}
 	
 }

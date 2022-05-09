@@ -3,19 +3,13 @@ package com.anafthdev.weather.model.weather
 import com.google.gson.Gson
 
 data class Weather(
-    val base: String,
-    val clouds: Clouds,
-    val cod: Int,
-    val coord: Coord,
-    val dt: Int,
-    val id: Int,
-    val main: Main,
-    val name: String,
-    val sys: Sys,
-    val timezone: Int,
-    val visibility: Int,
-    val weather: List<WeatherX>,
-    val wind: Wind
+    val elevation: Double,
+    val generationtime_ms: Double,
+    val hourly: Hourly,
+    val hourly_units: HourlyUnits,
+    val latitude: Double,
+    val longitude: Double,
+    val utc_offset_seconds: Int
 ) {
     
     fun toJSON(): String {
@@ -24,21 +18,15 @@ data class Weather(
     
     companion object {
         val default = Weather(
-            base = "",
-            cod = -1,
-            id = -1,
-            dt = -1,
-            name = "",
-            timezone = -1,
-            visibility = -1,
-            clouds = Clouds.default,
-            coord = Coord.default,
-            main = Main.default,
-            sys = Sys.default,
-            wind = Wind.default,
-            weather = listOf(WeatherX.default)
+            elevation = 0.0,
+            generationtime_ms = 0.0,
+            hourly = Hourly.default,
+            hourly_units = HourlyUnits.default,
+            latitude = 0.0,
+            longitude = 0.0,
+            utc_offset_seconds = 0
         )
-    
+        
         fun fromJSON(src: String): Weather {
             return Gson().fromJson(src, Weather::class.java)
         }

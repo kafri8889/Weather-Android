@@ -8,6 +8,6 @@ interface IDatasource {
 	
 	val dispatcher: CoroutineDispatcher
 	
-	fun getWeather(lat: Double, lon: Double, apiKey: String): Flow<Weather>
+	fun getWeather(lat: Double, lon: Double, timezone: String): Flow<Weather>
 	
 }

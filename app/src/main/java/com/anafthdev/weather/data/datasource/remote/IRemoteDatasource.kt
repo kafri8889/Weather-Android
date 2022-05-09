@@ -8,6 +8,6 @@ interface IRemoteDatasource {
 	
 	val dispatcher: CoroutineDispatcher
 	
-	fun getWeather(lat: Double, lon: Double, apiKey: String, onFailure: suspend () -> Weather): Flow<Weather>
+	fun getWeather(lat: Double, lon: Double, timezone: String, onFailure: suspend () -> Weather): Flow<Weather>
 	
 }

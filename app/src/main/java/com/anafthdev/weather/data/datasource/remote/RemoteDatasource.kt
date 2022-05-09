@@ -24,12 +24,12 @@ class RemoteDatasource @Inject constructor(
 	override fun getWeather(
 		lat: Double,
 		lon: Double,
-		apiKey: String,
+		timezone: String,
 		onFailure: suspend () -> Weather
 	): Flow<Weather> {
 		val weather = MutableStateFlow(Weather.default)
 		
-		weatherService.getWeather(lat, lon, apiKey).enqueue(object : Callback<Weather> {
+		weatherService.getWeather(lat, lon, timezone).enqueue(object : Callback<Weather> {
 			override fun onResponse(call: Call<Weather>, response: Response<Weather>) {
 				CoroutineScope(dispatcher).launch {
 					if (response.isSuccessful) {
@@ -37,7 +37,7 @@ class RemoteDatasource @Inject constructor(
 						Timber.i("response success: ${response.body()}")
 					} else {
 						weather.emit(onFailure())
-						Timber.i("response failure: ${response.message()}")
+						Timber.i("response failure: ${response.errorBody()?.string()}")
 					}
 				}
 			}
