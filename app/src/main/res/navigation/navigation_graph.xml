@@ -9,5 +9,38 @@
         android:id="@+id/homeFragment"
         android:name="com.anafthdev.weather.ui.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_selectCityFragment"
+            app:destination="@id/selectCityFragment"
+            app:launchSingleTop="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.anafthdev.weather.ui.map.MapFragment"
+        android:label="fragment_map"
+        tools:layout="@layout/fragment_map" />
+
+    <fragment
+        android:id="@+id/selectCityFragment"
+        android:name="com.anafthdev.weather.ui.select_city.SelectCityFragment"
+        android:label="fragment_select_city"
+        tools:layout="@layout/fragment_select_city" >
+        <action
+            android:id="@+id/action_selectCityFragment_to_mapFragment"
+            app:destination="@id/mapFragment"
+            app:launchSingleTop="true"/>
+        <action
+            android:id="@+id/action_selectCityFragment_to_searchCityFragment"
+            app:destination="@id/searchCityFragment"
+            app:launchSingleTop="true"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchCityFragment"
+        android:name="com.anafthdev.weather.ui.search_city.SearchCityFragment"
+        android:label="fragment_search_city"
+        tools:layout="@layout/fragment_search_city" />
+
 </navigation>

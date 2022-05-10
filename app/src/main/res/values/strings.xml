@@ -3,4 +3,12 @@
     <string name="weather_api_key">92f56841259a3ed86d83d265d03a243d</string>
     <string name="mapbox_access_token">pk.eyJ1Ijoia2Fmcmk4ODg5IiwiYSI6ImNsMnE3MTZqZDAzdGozY3MwN3gxOTlmdXEifQ.VGItxS8wCWnpAbkM0xPIWA</string>
     <string name="mapbox_test_secret_token">sk.eyJ1Ijoia2Fmcmk4ODg5IiwiYSI6ImNsMnE3ZGc0NTFueGIzYm11aHk1eDk5cnoifQ.MXwGzrprrY5Jx2beGkIY2w</string>
+
+    <string name="search">Search</string>
+    <string name="select_city">Select city</string>
+    <string name="my_location">My Location</string>
+    <string name="you_must_allow_location_access">You must allow location access</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
