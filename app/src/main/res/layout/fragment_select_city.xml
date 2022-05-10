@@ -13,7 +13,10 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvCities_SelectCityFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="@dimen/_8sdp"
+            android:overScrollMode="never"
+            tools:listitem="@layout/city_select"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/addCity_SelectCityFragment"
