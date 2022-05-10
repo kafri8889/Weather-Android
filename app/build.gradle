@@ -81,6 +81,9 @@ dependencies {
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
     implementation 'com.intuit.ssp:ssp-android:1.0.6'
     implementation 'com.jakewharton.timber:timber:5.0.1'
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation "io.coil-kt:coil:1.4.0"
+    implementation "io.coil-kt:coil-svg:1.2.0"
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
