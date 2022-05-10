@@ -26,11 +26,25 @@ class SelectCityViewModel @Inject constructor(
 				}
 			}
 		}
+		
+		viewModelScope.launch(environment.dispatcher) {
+			environment.getAvailableCity().collect { cities ->
+				setState {
+					copy(
+						availableCities = cities
+					)
+				}
+			}
+		}
 	}
 	
 	override fun dispatch(action: SelectCityAction) {
 		when (action) {
-		
+			is SelectCityAction.SetSelectedCity -> {
+				viewModelScope.launch(environment.dispatcher) {
+					environment.setSelectedCity(action.city)
+				}
+			}
 		}
 	}
 	
