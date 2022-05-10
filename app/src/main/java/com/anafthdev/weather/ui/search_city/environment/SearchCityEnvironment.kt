@@ -13,7 +13,7 @@ import javax.inject.Inject
 import javax.inject.Named
 
 class SearchCityEnvironment @Inject constructor(
-	@Named(DiName.DISPATCHER_MAIN) override val dispatcher: CoroutineDispatcher,
+	@Named(DiName.DISPATCHER_IO) override val dispatcher: CoroutineDispatcher,
 	private val repository: IRepository
 ): ISearchCityEnvironment {
 	
@@ -28,6 +28,10 @@ class SearchCityEnvironment @Inject constructor(
 	
 	override fun getCity(): Flow<List<City>?> {
 		return cities.asFlow()
+	}
+	
+	override suspend fun insertCity(vararg city: City) {
+		repository.insertCity(*city)
 	}
 	
 }

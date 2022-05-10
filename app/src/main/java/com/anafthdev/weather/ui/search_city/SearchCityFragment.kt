@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.anafthdev.weather.R
 import com.anafthdev.weather.databinding.FragmentSearchCityBinding
 import com.anafthdev.weather.foundation.extension.deviceLocale
+import com.anafthdev.weather.foundation.interfaces.OnItemClickListener
+import com.anafthdev.weather.model.geocoding.City
 import com.anafthdev.weather.ui.search_city.data.SearchCityRecyclerAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -48,7 +50,18 @@ class SearchCityFragment : Fragment() {
 		
 		(requireActivity() as AppCompatActivity).supportActionBar?.hide()
 		
-		searchCityRecyclerAdapter = SearchCityRecyclerAdapter()
+		searchCityRecyclerAdapter = SearchCityRecyclerAdapter(object : OnItemClickListener<City> {
+			override fun onItemClick(item: City) {
+				Timber.i("lisssss: $item")
+				searchCityViewModel.dispatch(
+					SearchCityAction.InsertCity(
+						listOf(item)
+					)
+				)
+				
+				navController.popBackStack()
+			}
+		})
 		
 		lifecycleScope.launch {
 			searchCityViewModel.state.collect { newState ->

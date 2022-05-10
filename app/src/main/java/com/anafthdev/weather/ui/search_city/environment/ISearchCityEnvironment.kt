@@ -12,4 +12,6 @@ interface ISearchCityEnvironment {
 	
 	fun getCity(): Flow<List<City>?>
 	
+	suspend fun insertCity(vararg city: City)
+	
 }
