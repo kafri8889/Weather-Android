@@ -7,11 +7,11 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "city_table")
 data class City(
     @PrimaryKey val id: Int,
-    @ColumnInfo(name = "admin1") val admin1: String,
+    @ColumnInfo(name = "admin1") val admin1: String?,
     @ColumnInfo(name = "admin1_id") val admin1_id: Int,
-    @ColumnInfo(name = "admin2") val admin2: String,
+    @ColumnInfo(name = "admin2") val admin2: String?,
     @ColumnInfo(name = "admin2_id") val admin2_id: Int,
-    @ColumnInfo(name = "admin3") val admin3: String,
+    @ColumnInfo(name = "admin3") val admin3: String?,
     @ColumnInfo(name = "admin3_id") val admin3_id: Int,
     @ColumnInfo(name = "country") val country: String,
     @ColumnInfo(name = "country_code") val country_code: String,
@@ -22,7 +22,7 @@ data class City(
     @ColumnInfo(name = "longitude") val longitude: Double,
     @ColumnInfo(name = "name") val name: String,
     @ColumnInfo(name = "population") val population: Int,
-    @ColumnInfo(name = "postcodes") val postcodes: List<String>,
+    @ColumnInfo(name = "postcodes") val postcodes: List<String>?,
     @ColumnInfo(name = "ranking") val ranking: Double,
     @ColumnInfo(name = "timezone") val timezone: String
 ) {
