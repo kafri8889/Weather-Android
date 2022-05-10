@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
 			})
 		}
 		
-		setSupportActionBar(binding.toolbarMainActivity.toolbar)
+		setSupportActionBar(binding.toolbar)
 		
 		if (!permissions.all { ActivityCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_GRANTED }) {
 			resultLauncher.launch(permissions)
