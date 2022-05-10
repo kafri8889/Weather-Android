@@ -12,7 +12,9 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -25,23 +27,18 @@ class SelectCityEnvironment @Inject constructor(
 	private val _selectedCity = MutableLiveData(City.default)
 	private val selectedCity: LiveData<City> = _selectedCity
 	
-	private val availableCity: ArrayList<City> = arrayListOf()
+	private val _availableCity = MutableLiveData(emptyList<City>())
+	private val availableCity: LiveData<List<City>> = _availableCity
 	
 	init {
 		CoroutineScope(dispatcher).launch {
-			appDatastore.getSelectedCityID.collect { id ->
+			repository.getAvailableCity().combine(appDatastore.getSelectedCityID) { cities, id ->
+				cities to id
+			}.collect { pair ->
+				_availableCity.postValue(pair.first)
 				_selectedCity.postValue(
-					availableCity.get { it.id == id } ?: City.default
+					pair.first.get { it.id == pair.second } ?: City.default
 				)
-			}
-		}
-		
-		CoroutineScope(dispatcher).launch {
-			repository.getAvailableCity().collect { cities ->
-				availableCity.apply {
-					clear()
-					addAll(cities)
-				}
 			}
 		}
 	}
@@ -52,5 +49,9 @@ class SelectCityEnvironment @Inject constructor(
 	
 	override suspend fun setSelectedCity(city: City) {
 		appDatastore.setSelectedCityID(city.id)
+	}
+	
+	override fun getAvailableCity(): Flow<List<City>> {
+		return availableCity.asFlow()
 	}
 }

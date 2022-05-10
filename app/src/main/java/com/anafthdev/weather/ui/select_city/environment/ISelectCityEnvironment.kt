@@ -12,4 +12,6 @@ interface ISelectCityEnvironment {
 	
 	suspend fun setSelectedCity(city: City)
 	
+	fun getAvailableCity(): Flow<List<City>>
+	
 }
