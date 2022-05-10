@@ -41,4 +41,8 @@ class Datasource @Inject constructor(
 	override fun getAvailableCity(): Flow<List<City>> {
 		return localDatasource.getAvailableCity()
 	}
+	
+	override suspend fun insertCity(vararg city: City) {
+		localDatasource.insertCity(*city)
+	}
 }

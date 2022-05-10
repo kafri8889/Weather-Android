@@ -25,4 +25,8 @@ class LocalDatasource @Inject constructor(
 		return cityDAO.getAllCity()
 	}
 	
+	override suspend fun insertCity(vararg city: City) {
+		cityDAO.insert(*city)
+	}
+	
 }

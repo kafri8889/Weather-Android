@@ -1,6 +1,7 @@
 package com.anafthdev.weather.data.repository
 
 import com.anafthdev.weather.data.datasource.IDatasource
+import com.anafthdev.weather.data.db.dao.CityDAO
 import com.anafthdev.weather.foundation.di.DiName
 import com.anafthdev.weather.model.geocoding.City
 import com.anafthdev.weather.model.weather.Weather
@@ -24,6 +25,10 @@ class Repository @Inject constructor(
 	
 	override fun getAvailableCity(): Flow<List<City>> {
 		return datasource.getAvailableCity()
+	}
+	
+	override suspend fun insertCity(vararg city: City) {
+		datasource.insertCity(*city)
 	}
 	
 }

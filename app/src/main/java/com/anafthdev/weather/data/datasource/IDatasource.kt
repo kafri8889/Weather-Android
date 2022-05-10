@@ -15,4 +15,6 @@ interface IDatasource {
 	
 	fun getAvailableCity(): Flow<List<City>>
 	
+	suspend fun insertCity(vararg city: City)
+	
 }
