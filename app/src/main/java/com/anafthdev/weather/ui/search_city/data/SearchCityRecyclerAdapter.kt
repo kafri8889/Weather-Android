@@ -14,10 +14,13 @@ import com.anafthdev.weather.R
 import com.anafthdev.weather.data.diffutil.CityDiffUtil
 import com.anafthdev.weather.data.networking.geocoding.GeocodingClient
 import com.anafthdev.weather.databinding.CitySearchBinding
+import com.anafthdev.weather.foundation.interfaces.OnItemClickListener
 import com.anafthdev.weather.model.geocoding.City
 import timber.log.Timber
 
-class SearchCityRecyclerAdapter: ListAdapter<City,SearchCityRecyclerAdapter.ViewHolder>(
+class SearchCityRecyclerAdapter(
+	private val listener: OnItemClickListener<City>,
+): ListAdapter<City,SearchCityRecyclerAdapter.ViewHolder>(
 	CityDiffUtil()
 ) {
 	
@@ -43,7 +46,7 @@ class SearchCityRecyclerAdapter: ListAdapter<City,SearchCityRecyclerAdapter.View
 			binding.cityCitySearch.text = city.name
 			binding.countryCitySearch.text = city.country
 			binding.root.setOnClickListener {
-			
+				listener.onItemClick(city)
 			}
 		}
 	}
