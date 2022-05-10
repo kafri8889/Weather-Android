@@ -2,6 +2,8 @@ package com.anafthdev.weather.ui.map
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.location.Address
+import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
@@ -18,6 +20,9 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.anafthdev.weather.R
 import com.anafthdev.weather.databinding.FragmentMapBinding
+import com.anafthdev.weather.foundation.extension.deviceLocale
+import com.anafthdev.weather.foundation.extension.toast
+import com.anafthdev.weather.model.geocoding.City
 import com.anafthdev.weather.ui.map.data.LocationChangeCallback
 import com.anafthdev.weather.ui.map.data.LocationChangeListener
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -37,6 +42,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
+import kotlin.random.Random
 
 @AndroidEntryPoint
 class MapFragment : Fragment(), OnMapReadyCallback, LocationChangeListener {
@@ -184,6 +190,51 @@ class MapFragment : Fragment(), OnMapReadyCallback, LocationChangeListener {
 	
 	private fun initUI() {
 		binding.mapViewMapFragment.getMapAsync(this)
+		
+		binding.saveMapFragment.setOnClickListener {
+			val isValid = try {
+				val latitude = mapBoxMap.cameraPosition.target.latitude
+				val longitude = mapBoxMap.cameraPosition.target.longitude
+				val address = Geocoder(requireContext(), deviceLocale).getFromLocation(
+					latitude,
+					longitude,
+					1
+				) as List<Address>
+				
+				mapViewModel.dispatch(
+					MapAction.InsertCity(
+						city = City(
+							id = Random.nextInt(),
+							name = address[0].locality,
+							latitude = latitude,
+							longitude = longitude,
+							admin1 = address[0].adminArea,
+							admin1_id = Random.nextInt(),
+							admin2 = address[0].subAdminArea,
+							admin2_id = Random.nextInt(),
+							admin3 = address[0].subAdminArea,
+							admin3_id = Random.nextInt(),
+							country = deviceLocale.displayCountry,
+							country_code = deviceLocale.country,
+							country_id = Random.nextInt(),
+							elevation = 0.0,
+							feature_code = "",
+							population = 0,
+							ranking = 0.0,
+							timezone = "",
+							postcodes = null
+						)
+					)
+				)
+				
+				true
+			} catch (e: Exception) {
+				false
+			}
+			
+			if (isValid) navController.popBackStack()
+			else getString(R.string.invalid_location).toast(requireContext())
+		}
 		
 		binding.myLocationMapFragment.setOnClickListener { view ->
 			mapBoxMap.animateCamera({

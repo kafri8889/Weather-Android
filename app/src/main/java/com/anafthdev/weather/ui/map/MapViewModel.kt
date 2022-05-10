@@ -35,6 +35,11 @@ class MapViewModel @Inject constructor(
 					environment.setCurrentLocation(action.location)
 				}
 			}
+			is MapAction.InsertCity -> {
+				viewModelScope.launch(environment.dispatcher) {
+					environment.insertCity(action.city)
+				}
+			}
 		}
 	}
 }
