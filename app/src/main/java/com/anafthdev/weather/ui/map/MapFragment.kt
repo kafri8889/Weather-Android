@@ -138,7 +138,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, LocationChangeListener {
 				this.mapBoxMap.locationComponent.let { lc ->
 					lc.activateLocationComponent(locationComponentActivationOptions)
 					lc.isLocationComponentEnabled = true
-					lc.cameraMode = CameraMode.TRACKING
+					lc.cameraMode = CameraMode.TRACKING_GPS
 					lc.renderMode = RenderMode.GPS
 				}
 				
@@ -148,6 +148,8 @@ class MapFragment : Fragment(), OnMapReadyCallback, LocationChangeListener {
 					.setMaxWaitTime(DEFAULT_MAX_WAIT_TIME).build()
 				locationEngine.requestLocationUpdates(request, callback, Looper.getMainLooper())
 				locationEngine.getLastLocation(callback)
+				
+				mapBoxMap.locationComponent.locationEngine = locationEngine
 			}
 		}
 		
