@@ -43,12 +43,12 @@ class SelectCityEnvironment @Inject constructor(
 		}
 	}
 	
-	override suspend fun getSelectedCity(): Flow<City> {
-		return selectedCity.asFlow()
-	}
-	
 	override suspend fun setSelectedCity(city: City) {
 		appDatastore.setSelectedCityID(city.id)
+	}
+	
+	override fun getSelectedCity(): Flow<City> {
+		return selectedCity.asFlow()
 	}
 	
 	override fun getAvailableCity(): Flow<List<City>> {

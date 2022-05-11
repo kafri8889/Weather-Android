@@ -23,6 +23,16 @@ class HomeViewModel @Inject constructor(
 				}
 			}
 		}
+		
+		viewModelScope.launch(environment.dispatcher) {
+			environment.getSelectedCity().collect { city ->
+				setState {
+					copy(
+						selectedCity = city
+					)
+				}
+			}
+		}
 	}
 	
 	override fun dispatch(action: HomeAction) {

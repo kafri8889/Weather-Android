@@ -8,9 +8,9 @@ interface ISelectCityEnvironment {
 	
 	val dispatcher: CoroutineDispatcher
 	
-	suspend fun getSelectedCity(): Flow<City>
-	
 	suspend fun setSelectedCity(city: City)
+	
+	fun getSelectedCity(): Flow<City>
 	
 	fun getAvailableCity(): Flow<List<City>>
 	

@@ -2,6 +2,7 @@ package com.anafthdev.weather.ui.home
 
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -23,6 +24,8 @@ class HomeFragment : Fragment() {
 	
 	private val homeViewModel: HomeViewModel by viewModels()
 	
+	private var supportActionBar: ActionBar? = null
+	
 	private var state: HomeState = HomeState()
 	
 	override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,7 +43,8 @@ class HomeFragment : Fragment() {
 		
 		navController = findNavController()
 		
-		(requireActivity() as AppCompatActivity).supportActionBar?.let {
+		supportActionBar = (requireActivity() as AppCompatActivity).supportActionBar
+		supportActionBar?.let {
 			it.setDisplayHomeAsUpEnabled(false)
 			it.setDisplayShowHomeEnabled(false)
 		}
@@ -48,16 +52,18 @@ class HomeFragment : Fragment() {
 		lifecycleScope.launch {
 			homeViewModel.state.collect { newState ->
 				state = newState
-				updateUI()
+				requireActivity().runOnUiThread {
+					updateUI()
+				}
 			}
 		}
 		
 		binding.buttonFetch.setOnClickListener {
 			homeViewModel.dispatch(
 				HomeAction.GetWeather(
-					lat = -6.474009961699578,
-					lon = 106.79156490092377,
-					timezone = TimeZone.getDefault().id
+					lat = state.selectedCity.latitude,
+					lon = state.selectedCity.longitude,
+					timezone = state.selectedCity.timezone.ifBlank { TimeZone.getDefault().id }
 				)
 			)
 		}
@@ -79,5 +85,7 @@ class HomeFragment : Fragment() {
 	
 	private fun updateUI() {
 		binding.tex.text = state.weather.toString()
+		
+		supportActionBar?.title = state.selectedCity.name.ifBlank { getString(R.string.app_name) }
 	}
 }
