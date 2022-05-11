@@ -30,6 +30,9 @@ class SelectCityRecyclerAdapter(
 			
 			binding.cityCitySelect.text = city.name
 			binding.radioButtonCitySelect.isChecked = city.id == selectedCity.id
+			binding.radioButtonCitySelect.setOnClickListener {
+				listener.onItemClick(city)
+			}
 			binding.root.setOnClickListener {
 				listener.onItemClick(city)
 			}
